@@ -1,29 +1,37 @@
-# Experimental v0.1
+# Experimental release v0.1
 
-Experimental research release v0.1. See the evaluation notes before use.
+For research purposes. The released model is available on [Hugging Face](https://huggingface.co/Methane/Qwen3.8-Flash-Next-Abliterated-GSQ-RCO-IQ3_XXS-Calibrated-GGUF).
 
-For research purposes. See README and EVALUATION-NOTES for the local comparison and its limitations.
+## What is released?
 
-## What is included
+- An **83.14 GB model in two GGUF shards**: 54.34 GB of main weights and a 28.80 GB lookup table. Both are required.
+- Documentation, two comparison charts, source attribution and checksums.
+- A separate GitHub research-code snapshot, with no model weights, private data, raw logs or credentials.
 
-The preserved 83.14 GB mixed GGUF, source attribution, checksums and evaluation notes. The model package contains two shards. The code snapshot excludes weights, private data, raw logs, vendor source, local maintenance scripts and credentials. Exported tool paths are generic and may need configuration; this is not a complete portable rebuild pipeline. The requirements file covers earlier assembly tools, not every research dependency.
+This release preserves the selected experimental model. Later compression trials did not establish a smaller replacement. No new weights were assembled during publication preparation.
 
-## How to run
+## What changed from the baseline?
 
-Keep both GGUF shards together. With a compatible llama.cpp installed:
+The model retains ISTA's existing GSQ-RCO compression for unchanged weights and freshly quantizes 146 edited tensors from an abliterated checkpoint. AtomicChat's recipe informed format and precision choices; its calibration text was used, but no AtomicChat weights are included.
 
-```text
-llama-cli -m "Qwen3.8-Flash-Next-Abliterated-GSQ-RCO-IQ3_XXS-Calibrated-00001-of-00002.gguf" --lazy-mode on -ngl 999 -ncmoe 43 -t 12 -c 16384 -ctk q8_0 -ctv q5_1 -fa on -b 512 -ub 128 -rea off --reasoning-budget 0 -p "Explain how a rainbow forms." -n 256 --single-turn
-```
+It is **GSQ-RCO-based**, not a fresh full-model upstream GSQ/RCO run. See [source provenance](PROVENANCE.json).
 
-The example uses 12 CPU threads and 43 CPU MoE layers from the measured profile, not a universal optimum. It allocates 16K context; this is not a claim about populated long-context performance. Allocate memory conservatively on other machines.
+## How to use it
 
-## Evidence and remaining limits
+Follow the [README download and launch instructions](README.md#use-the-released-model). Rebuilding from the research scripts is not required to run the downloaded model.
 
-Latest short tests on the owner's machine: 21.13 tokens/s versus 16.16 for untouched ISTA, with a 9.6% larger model. Tests used the older frozen runtime. The updated engine passed a short generation check, but its throughput was not compared. Historical quality samples do not establish equivalence. Raw coding completions are primary; the formatting diagnostic is separate. Some runs left only 2–4 GiB free RAM. No vision or MTP weights are included.
+Text only; vision and MTP draft weights are not included. Use compatible llama.cpp and SSD storage, and leave memory for the conversation cache.
 
-Compression experiments did not establish a smaller replacement. No new model was assembled during release preparation. Treat this as an experimental release, not a fully accepted or maximally optimized model.
+## Results and limits
 
-## Integrity
+Short local tests measured **21.13 tokens/s versus 16.16 for untouched ISTA**, with a **9.6% larger download**. The tested machine had an i7-12700K, RTX 5070 Ti 16 GB, 64 GB RAM and NVMe storage.
 
-SHA256SUMS includes previously verified full model hashes and newly hashed small package files. Packaging checks sizes, modification times and hardlink identity. Local hardlinks share existing weights rather than duplicating 83 GB. Editing a linked GGUF affects every link; treat weights as immutable. A later upload will transfer the full logical model size.
+Historical quality samples do not prove equivalence. Long-conversation performance, updated-engine throughput and a full high-precision reference comparison remain unestablished. Some runs left only 2–4 GiB free RAM. See [evaluation notes](EVALUATION-NOTES.md).
+
+The code is a research snapshot: intermediate data and external dependency trees are excluded, and the requirements file does not cover every research tool. A complete portable rebuild remains unfinished.
+
+## Verify downloads
+
+[SHA256SUMS](SHA256SUMS) in this GitHub repository covers its code and documentation. The model repository has its own SHA256SUMS, including both GGUF shards. Compare a downloaded file's SHA256 digest with the matching entry in the appropriate repository.
+
+All model tensor bytes were checked before publication. Both model shards were fully hashed during upload, and the uploaded release files were verified against the audited inventory.
