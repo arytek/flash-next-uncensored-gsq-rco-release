@@ -1,0 +1,3 @@
+numpy==2.5.3
+gguf @ git+https://github.com/ggml-org/llama.cpp.git@7fe450e19305b828c199d602c23a8337aaa1f03b#subdirectory=gguf-py
+

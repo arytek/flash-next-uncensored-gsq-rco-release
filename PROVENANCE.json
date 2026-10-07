@@ -1,0 +1,52 @@
+{
+  "release": "experimental-v0.1",
+  "publication_status": "experimental research release v0.1",
+  "logical_model_bytes": 83144446848,
+  "model_files": [
+    {
+      "sha256": "84512ed5aaa14930c56345eaaa88adccddce5a80a700b102c0b9fbfdc955f507",
+      "bytes": 54344308416,
+      "filename": "Qwen3.8-Flash-Next-Abliterated-GSQ-RCO-IQ3_XXS-Calibrated-00001-of-00002.gguf"
+    },
+    {
+      "sha256": "316b46f3a2dbd68c900f43136ab9449f9dcc3725dfd8c794847c204bc161e113",
+      "bytes": 28800138432,
+      "filename": "Qwen3.8-Flash-Next-Abliterated-GSQ-RCO-IQ3_XXS-Calibrated-00002-of-00002.gguf"
+    }
+  ],
+  "weight_hash_verification_utc": "2026-10-06T18:08:43.617150+00:00",
+  "verification_note": "Full SHA256 checks from the final integrity audit. Packaging checks file size, modification time and hardlink identity; it does not repeat the full model hash.",
+  "retained_ista_tensors": 1078,
+  "retained_source_revision": "unknown: original owner-downloaded IQ3_XXS source; local payload identity verified",
+  "freshly_quantized_ablated_tensors": 146,
+  "edited_formats": {
+    "Q8_0": 98,
+    "IQ4_NL": 46,
+    "Q2_0": 2
+  },
+  "ablated_source": {
+    "repo": "windowsxp811203/Qwen3.8-Flash-Next-Abliterated",
+    "revision": "deb02632504bb214702bc28b0381a93d3112f500"
+  },
+  "calibration": {
+    "repo": "AtomicChat/calib-corpora",
+    "revision": "8178d96379feb4c484ad5de8cb3ae61101ae8dfb",
+    "file": "builds/qwen3.8-flash-next-moe/calib_train.txt",
+    "sha256": "2534f97f623ed152f93f967ed6f491d626291fb402318d81712f980a19b738d1",
+    "chunks": 128,
+    "tokens_per_chunk": 512,
+    "activation_reference": "earlier quantized hybrid"
+  },
+  "comparison_baseline_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+  "method_scope": "Retained GSQ-RCO weights plus freshly quantized ablated tensors and targeted GSQ-style refinement; no full upstream GSQ/RCO rerun.",
+  "atomicchat_weights_included": false,
+  "comparison_runtime": {
+    "build": 11199,
+    "commit_prefix": "86a24a182"
+  },
+  "launcher_verified_runtime": {
+    "build": 11454,
+    "commit": "4625240437c6821ee5c2da99e12d4817c6a8f07f"
+  },
+  "portable_reproduction": "unfinished: private intermediate payloads, calibration records and vendor dependencies excluded from code snapshot"
+}

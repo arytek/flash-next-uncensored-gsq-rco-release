@@ -1,0 +1,28 @@
+{
+  "speed_tokens_per_second": {
+    "ista": 16.16,
+    "model": 21.13
+  },
+  "total_bytes": {
+    "ista": 75839998528,
+    "model": 83144446848
+  },
+  "quality_sample_counts": [
+    456,
+    256,
+    128,
+    164
+  ],
+  "quality_ista_correct": [
+    386,
+    226,
+    107,
+    111
+  ],
+  "quality_model_correct": [
+    377,
+    222,
+    109,
+    109
+  ]
+}
